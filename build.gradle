@@ -5,8 +5,19 @@ plugins {
 group = 'fr.frivec'
 version = '1.0-SNAPSHOT'
 
+compileJava.options.encoding = 'UTF-8'
+
+
+tasks.withType(JavaCompile) {
+
+    options.encoding = 'UTF-8'
+
+}
+
+
 repositories {
     mavenCentral()
+    mavenLocal()
     maven {
         name = 'papermc-repo'
         url = 'https://repo.papermc.io/repository/maven-public/'
@@ -18,7 +29,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
+
+    compileOnly 'org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT'
+
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+
 }
 
 def targetJavaVersion = 17

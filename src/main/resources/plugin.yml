@@ -1,6 +1,9 @@
 name: ArmorStandsModels
 version: '${version}'
-main: fr.frivec.armorstandsmodels.Armorstandsmodels
+main: fr.frivec.armorstandsmodels.ArmorStandsModels
 api-version: 1.18
 authors: [ Frivec ]
 description: A plugin to create models using ArmorStands
+commands:
+  dev:
+    description: test Command
