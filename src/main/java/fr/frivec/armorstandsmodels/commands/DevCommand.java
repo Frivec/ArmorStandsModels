@@ -42,12 +42,15 @@ public class DevCommand implements CommandExecutor {
                         final float angle = Float.parseFloat(args[2]);
                         final double radiantAngle = Math.toRadians(angle);
 
+                        player.sendMessage(Component.text("Angle: " + angle + "° | Radiant: " + radiantAngle));
+                        player.sendMessage(Component.text("§9Start Location : " + this.point.getLocation().getX() + " | " + this.point.getLocation().getZ()));
+
                         //Vector from 0 0 to Origin of system
                         final Vector centerToOrigin = new Vector(this.origin.getLocation().getX(), this.origin.getLocation().getY(), this.origin.getLocation().getZ()),
                                     invertedCenterToOrigin = centerToOrigin.clone().multiply(-1);
 
                         //Phantom point based on 0 0
-                        final Location pointOnCenter = new Location(Bukkit.getWorld("world"), this.point.getLocation().getX() + invertedCenterToOrigin.getX(), this.point.getLocation().getY(), this.point.getLocation().getZ() + invertedCenterToOrigin.getZ());
+                        final Location pointOnCenter = new Location(Bukkit.getWorld("world"), roundTo2Decimals(this.point.getLocation().getX() + invertedCenterToOrigin.getX()), this.point.getLocation().getY(), roundTo2Decimals(this.point.getLocation().getZ() + invertedCenterToOrigin.getZ()));
 
                         player.sendMessage(Component.text("§cPoint on center : x: " + pointOnCenter.getX() + " | z: " + pointOnCenter.getZ()));
 
@@ -57,9 +60,9 @@ public class DevCommand implements CommandExecutor {
 
                         //Register values for first matrix
                         matrixA[0][0] = roundTo2Decimals(Math.cos(radiantAngle));
-                        matrixA[0][1] = roundTo2Decimals(-1 * Math.sin(radiantAngle));
+                        matrixA[0][1] = roundTo2Decimals((double) -1 * Math.sin(radiantAngle));
                         matrixA[1][0] = roundTo2Decimals(Math.sin(radiantAngle));
-                        matrixA[1][1] = roundTo2Decimals(matrixA[0][1]);
+                        matrixA[1][1] = roundTo2Decimals(matrixA[0][0]);
 
                         //Register values for second matrix
                         //+x is on +y axis on cartesian plan, +z is on +x axis on cartesian plan
