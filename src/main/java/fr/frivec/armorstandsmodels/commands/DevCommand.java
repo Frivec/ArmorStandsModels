@@ -65,7 +65,7 @@ public class DevCommand implements CommandExecutor {
                         matrixA[1][1] = roundTo2Decimals(matrixA[0][0]);
 
                         //Register values for second matrix
-                        //+x is on +y axis on cartesian plan, +z is on +x axis on cartesian plan
+                        //+x is on Y-axis on cartesian plan, +z is on X-axis on cartesian plan
                         matrixB[0][0] = roundTo2Decimals(pointOnCenter.getZ());
                         matrixB[0][1] = roundTo2Decimals(pointOnCenter.getX());
 
@@ -76,7 +76,15 @@ public class DevCommand implements CommandExecutor {
 
                         player.sendMessage(Component.text("§bAfter rotation: x: " + xMatrix[0][1] + " | z:" + xMatrix[0][0]));
 
-                        final Location newLocation = new Location(pointOnCenter.getWorld(), xMatrix[0][1] + centerToOrigin.getX(), pointOnCenter.getY(), xMatrix[0][0] + centerToOrigin.getZ());
+                        //Define new rotation for armor stand
+
+                        float yaw = this.point.getLocation().getYaw() - angle;
+
+                        if(yaw < 0)
+
+                            yaw += 360;
+
+                        final Location newLocation = new Location(pointOnCenter.getWorld(), xMatrix[0][1] + centerToOrigin.getX(), pointOnCenter.getY(), xMatrix[0][0] + centerToOrigin.getZ(), yaw, this.point.getLocation().getPitch());
 
                         this.point.teleport(newLocation);
 
